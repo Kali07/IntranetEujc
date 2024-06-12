@@ -1,0 +1,87 @@
+body{
+
+    background-color: rgb(255, 255, 255);
+}
+
+.haut{
+
+   /* background-image: url(https://www.lu.lv/fileadmin/_processed_/3/0/csm_rokas_c820c15821.png);*/
+   
+    width: 350px;
+    background-color: #F1C864;
+    text-align: justify;
+    padding: 16px;
+
+}
+
+.milieu{
+
+    /*background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoLCzLXZtSYmAlR3vsaUj5a_51MMOfi75A8w&s);*/ 
+    width: 350px;
+    background-color: #2656e6;
+    text-align: justify;
+    padding: 16px;
+    justify-content: center;
+
+}
+
+.bas{
+
+   /* background-image: url(https://hosting.renderforestsites.com/images/5699226/135134/586c0bff485ef33893e243664ea1baac.jpg);*/
+
+    width: auto;
+    height: 500px;
+    background-size: cover;
+}
+
+
+header {
+    background-color: #909090;
+    color: white;
+    padding: 10px 20px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+nav.main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: flex-end; 
+    width: 90%; 
+}
+
+nav.main-nav li {
+    padding: 0 15px;
+}
+
+nav.main-nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav.main-nav a:hover {
+    text-decoration: underline;
+}
+
+
+footer {
+    background-color: #909090;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+footer p {
+    margin: 0px 0;
+}

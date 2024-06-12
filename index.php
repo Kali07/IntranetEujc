@@ -1,6 +1,49 @@
 
 <?php
-include 'data.php';
+require 'data.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST['login'])) {
+
+    $email = $_POST['id_user'];
+    $password = $_POST['password'];
+
+    $query = $data->prepare("SELECT * FROM USERS  WHERE  mot_de_passe = :mot_de_passe AND email = :email  " );
+
+    $query->bindParam(':mot_de_passe', $password);
+    $query->bindParam(':email', $email);
+    $query->execute();
+
+    $user = $query->fetch();
+
+    if($user){
+
+        session_start();
+
+        //on stocke toute les informations users dans les v de session 
+        $_SESSION['email'] = $user['email'];
+        $_SESSION['mot_de_passe'] = $user['mot_de_passe'];
+        $_SESSION['sexe'] = $user['sexe'];
+        $_SESSION['date_naissance'] = $user['date_naissance'];
+        $_SESSION['nom'] = $user['nom'];
+        $_SESSION['prenom'] = $user['prenom'];
+        $_SESSION['id_role'] = $user['id_role'];
+        $_SESSION['id_station'] = $user['id_station'];
+        $_SESSION['adresse'] = $user['adresse'];
+        $_SESSION['telephone'] = $user['telephone']; 
+
+        //pour verifier dans certaines  pages qu'on est connecté
+        $_SESSION['is_logged_in'] = true;
+
+        header('Location: accueil.php');
+
+        exit();
+
+    }
+    else{
+        echo "ImpossibleZ de vous connecter";
+    }
+
+}
 
 ?>
 

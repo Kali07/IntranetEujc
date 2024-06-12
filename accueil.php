@@ -1,3 +1,18 @@
+<?php
+session_start();
+
+//empecher d'arriver sur cette page si on est pas connecté
+if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] !== true) {
+    header('Location: index.php');  // Rediriger vers la page de connexion
+    exit; 
+}
+
+//echo  $_SESSION['nom'];
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -28,12 +43,24 @@
         </div>
     </div>
     <div class="profile-info" id="profile-info">
+        <?php
+            if($_SESSION['sexe'] == "Femme"){ ?>
+                
         <img src="https://img.icons8.com/?size=100&id=23290&format=png&color=000000" alt="Photo de profil" class="profile-pic-large">
-       <!-- si profil homme_voici image : https://img.icons8.com/?size=100&id=23293&format=png&color=000000 --> 
-		<h2>Utilisateur</h2>
-        <p>Email: utilisateur@example.com</p>
-        <p>Téléphone: 123-456-7890</p>
+        <?php 
+        } else { ?>
+        <img src="https://img.icons8.com/?size=100&id=23293&format=png&color=000000" alt="Photo de profil" class="profile-pic-large">
+       <?php } ?>
+
+		<h2><?=$_SESSION['nom']?> <?=$_SESSION['prenom']?></h2>
+        <p><b>Email :</b> <?=$_SESSION['email']?></p>
+        <p><b>Téléphone :</b> <?=$_SESSION['telephone']?></p>
+        <form action="logout.php" method="POST">
+            <button class="profile-button" type="submit">Deconnexion</button>
+        </form>    
     </div>
+
+
     <script>
         function toggleProfile() {
             const profileInfo = document.getElementById('profile-info');

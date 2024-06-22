@@ -1,6 +1,7 @@
 <?php
 include 'fonctions.php';
 
+// Empêcher d'arriver sur cette page si on n'est pas connecté
 checkUserLoggedIn();
 ?>
 
@@ -22,6 +23,9 @@ checkUserLoggedIn();
         </div>
         <div class="menu-item" id="qcm">
             <i class="icon">📋</i> QCM
+        </div>
+        <div class="menu-item" id="evenement">
+            <i class="icon">📋</i> EVENEMENT
         </div>
     </div>
     <div class="main-content">

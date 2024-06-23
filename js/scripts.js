@@ -1,4 +1,10 @@
+function toggleProfile() {
+    const profileInfo = document.getElementById('profile-info');
+    profileInfo.style.display = profileInfo.style.display === 'block' ? 'none' : 'block';
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    
     // Fonction pour afficher/masquer le formulaire
     function toggleForm() {
         const formContainer = document.getElementById("eventFormContainer");

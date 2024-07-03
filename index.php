@@ -19,7 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST['login'])) {
 
         session_start();
 
-        //on stocke toute les informations users dans les v de session 
+        //on stocke toute les informations users dans les v de session
+        $_SESSION['id_user'] = $user['id_user']; 
         $_SESSION['email'] = $user['email'];
         $_SESSION['mot_de_passe'] = $user['mot_de_passe'];
         $_SESSION['sexe'] = $user['sexe'];

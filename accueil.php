@@ -1,8 +1,28 @@
 <?php
 include 'fonctions.php';
-
 // Empêcher d'arriver sur cette page si on n'est pas connecté
 checkUserLoggedIn();
+
+
+//gestion des events
+if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST['submit_event'])) {
+    
+    
+    $nom = $_POST['name'];
+    $description = $_POST['description'];
+    $date = $_POST['date'];
+    $idUtilisateur = $_SESSION['id_user'];
+    $idTypeEvent = $_POST['id_type_event'];
+    $type_event = getTypeEventById($idTypeEvent);
+    $id_evenement = generateUniqueIdEvents($type_event['label']);
+
+    
+
+insererEvenement($id_evenement,$nom, $description, $date, $idUtilisateur, $idTypeEvent);
+//headerlocation(accueil.php);
+}
+
+
 ?>
 
 <!DOCTYPE html>

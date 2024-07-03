@@ -19,24 +19,24 @@ $events = getAllEvents();
 
 <h1>EVENEMENTS</h1>
 <div class="events-container">
+<?php foreach ($events as $event) { ?>
     <div class="event-block">
         <img src="img/elv1.png" alt="Event 1" class="event-image">
         <div class="event-details">
-            <h3>Event 1</h3>
-            <p>Date: 2024-06-30</p>
+            <h3><?=$event['nom']?></h3>
+            <p><?=$event['date_event']?></p>
         </div>
     </div>
-    <div class="event-block">
-        <img src="img/elv1.png" alt="Event 2" class="event-image">
-        <div class="event-details">
-            <h3>Event 2</h3>
-            <p>Date: 2024-07-15</p>
-        </div>
-    </div>
+    <?php } 
+        if($_SESSION['id_role'] > 1){
+    ?> 
     <!-- More event blocks here -->
     <div class="event-block add-event">
         <button class="add-button" id="toggleFormBtn" onclick="toggleForm()">+</button>
     </div>
+    <?php } 
+    
+    ?> 
 </div>
 
 <!-- Formulaire caché -->

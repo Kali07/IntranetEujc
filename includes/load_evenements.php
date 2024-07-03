@@ -1,5 +1,10 @@
 <?php
+include '../fonctions.php';
+session_start();
+
 echo '<p>Cette section sera dédiée aux EVENEMENTS.</p>';
+$events = getAllEvents();
+
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +41,7 @@ echo '<p>Cette section sera dédiée aux EVENEMENTS.</p>';
 
 <!-- Formulaire caché -->
 <div id="eventFormContainer" class="hidden">
-    <form id="eventForm">
+    <form id="eventForm" method="POST" action="">
         <label for="name">Nom:</label>
         <input type="text" id="name" name="name" required>
 
@@ -47,21 +52,20 @@ echo '<p>Cette section sera dédiée aux EVENEMENTS.</p>';
         <input type="date" id="date" name="date" required>
 
         <label for="id_user">ID Utilisateur:</label>
-        <input type="text" id="id_user" name="id_user" required>
+        <input type="text" id="id_user" name="id_user" value="<?=$_SESSION['nom']?>" readonly>
+
 
         <label for="id_type_event">Type d'événement:</label>
         <select id="id_type_event" name="id_type_event" required>
             <?php
-            // Assurez-vous d'inclure la logique pour récupérer les types d'événements depuis votre base de données
-            // Exemple fictif :
-            $types = ["Type 1", "Type 2", "Type 3"];
+            $types = getAllTypeEvent();
             foreach ($types as $type) {
-                echo "<option value='$type'>$type</option>";
+                echo "<option value='" . htmlspecialchars($type['id_type_event']) . "'>" . htmlspecialchars($type['label']) . "</option>";
             }
             ?>
         </select>
 
-        <button type="submit">Ajouter Événement</button>
+        <button name="submit_event" type="submit">Ajouter Événement</button>
     </form>
 </div>
 

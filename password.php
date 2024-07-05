@@ -2,8 +2,22 @@
 session_start();
 require 'data.php';
 
+//Recuperation de l'Id utilisateur
 
-$email = $_POST['email'];
+$idUser = $_SESSION['id_user'];
+
+//Recuperation des infos liées à l'Id utilisateur
+
+$query = $data->prepare("SELECT * FROM users WHERE  id_user = :id" );
+
+$query->bindParam(':id', $idUser);
+$query->execute();
+$results = $query->fetch();
+
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST['submit'])) {
+
 
 
 $password_1 = $_POST['password_1'];
@@ -14,40 +28,19 @@ $password_3 = $_POST['password_3'];
 
 
 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST['submit'])) {
-
-
-
-$query = $data->prepare("SELECT * FROM users WHERE  email = :email AND mot_de_passe = :password_1 " );
-
-
-$query->bindParam(':email', $email);
-
-$query->bindParam(':password_1', $password_1);
-
-
-    $query->execute();
-  
-    $result = $query->fetch();
-
-
-if($result){
-
-
-
-
 if($password_3){
 
 
-    $query = $data->prepare ("UPDATE users SET mot_de_passe = :password_3 WHERE email = :email");
+    $query = $data->prepare ("UPDATE users SET mot_de_passe = :password_3 WHERE id_user = :id_user");
 
     $query->bindParam(':password_3', $password_3);
-    $query->bindParam(':email', $email);
+    $query->bindParam(':id_user', $idUser);
 
     $query->execute();
 
-    echo "Mot de passe sauvegardé";    
+    echo "Mot de passe sauvegardé";  
+    
+   // header('Location: accueil.php');
 
 }
 
@@ -55,10 +48,6 @@ if($password_3){
 
     echo "votre email ou mot de passe n'existe pas dans la base de données ";
 }
-
-
-}
-
 
 ?>
 
@@ -76,14 +65,16 @@ if($password_3){
 <br><br><br><br><br><br><br><br>
 
 <form action="" method="POST" onsubmit="return verifierMotsDePasse()">
-<label for="email"> Email</label>
-<input type="email" name="email" required><br><br>
+
 
 <label for="password_1"> Ancien Mot de passe</label>
-<input type="password" name="password_1"  required><br><br>
+
+<input type="password" id="password_1" name="password_1"  required><br><br>
 
 <label for="password_2"> Nouveau Mot de passe</label>
+
 <input type="password" id="password_2" name="password_2"  required><br><br>
+
 <p>confirmez le mot de passe</p>
 
 <input type="password" id="password_3" name="password_3"  required><br><br>

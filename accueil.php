@@ -58,9 +58,9 @@ insererEvenement($id_evenement,$nom, $description, $date, $idUtilisateur, $idTyp
     </div>
     <div class="profile-info" id="profile-info">
         <?php if ($_SESSION['sexe'] == "Femme") { ?>
-            <img src="https://img.icons8.com/?size=100&id=23290&format=png&color=000000" alt="Photo de profil" class="profile-pic-large">
+            <a href= "dataCompte.php"><img src="https://img.icons8.com/?size=100&id=23290&format=png&color=000000" alt="Photo de profil" class="profile-pic-large"></a>
         <?php } else { ?>
-            <img src="https://img.icons8.com/?size=100&id=23293&format=png&color=000000" alt="Photo de profil" class="profile-pic-large">
+            <a href= "dataCompte.php"><img src="https://img.icons8.com/?size=100&id=23293&format=png&color=000000" alt="Photo de profil" class="profile-pic-large"></a>
         <?php } ?>
         <h2><?= $_SESSION['nom'] ?> <?= $_SESSION['prenom'] ?></h2>
         <p><b>Email :</b> <?= $_SESSION['email'] ?></p>

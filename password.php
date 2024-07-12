@@ -5,6 +5,9 @@ require 'data.php';
 //Recuperation de l'Id utilisateur
 
 $idUser = $_SESSION['id_user'];
+$erreurMessage = '';
+$successMessage = '';
+
 
 //Recuperation des infos liées à l'Id utilisateur
 
@@ -18,13 +21,21 @@ $results = $query->fetch();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST['submit'])) {
 
+    //Recuperation du mdp dans la bdd
+
+    $password = $results['mot_de_passe'];
 
 
 $password_1 = $_POST['password_1'];
 
+//Comparaison du mdp etant dans bdd et celui saisi par l'user
+
+if($password === $password_1  ){
+
 $password_2 = $_POST['password_2'];
 
 $password_3 = $_POST['password_3'];
+
 
 
 
@@ -38,15 +49,21 @@ if($password_3){
 
     $query->execute();
 
-    echo "Mot de passe sauvegardé";  
-    
+    if($query->execute()){
+
+        $successMessage = "Votre mot de passe a été mis à jour avec succès";
+
+    }
+
    // header('Location: accueil.php');
 
-}
+ }
+
 
 } else{
+       $erreurMessage = " votre mot de passe n'existe pas dans la base de données ";
+}
 
-    echo "votre email ou mot de passe n'existe pas dans la base de données ";
 }
 
 ?>
@@ -60,11 +77,14 @@ if($password_3){
 <link rel="stylesheet" href="css/password.css">
 <script src="js/password.js"></script>
 </head>
-<body>
+<body >
 
 <br><br><br><br><br><br><br><br>
 
+<div class="formulaire">
+
 <form action="" method="POST" onsubmit="return verifierMotsDePasse()">
+
 
 
 <label for="password_1"> Ancien Mot de passe</label>
@@ -81,9 +101,18 @@ if($password_3){
 
 <p id="erreurMotDePasse" style="color: red;"></p>
 
+<p id="successMessage" style="color: green;"><?= $successMessage; ?></p>
+
+<p id="erreurMessage" style="color: red;"><?= $erreurMessage; ?></p>
+
+
 <button type="submit" name="submit">Enregistrer</button>
 
+
 </form>
+
+</div>
+
 
 </body>
 </html>

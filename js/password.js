@@ -1,4 +1,3 @@
-
 function verifierMotsDePasse() {
     var nouveauMotDePasse = document.getElementById('password_2').value;
     var confirmationMotDePasse = document.getElementById('password_3').value;
@@ -9,14 +8,7 @@ function verifierMotsDePasse() {
     erreurMotDePasse.textContent = '';
 
     if (nouveauMotDePasse !== confirmationMotDePasse) {
-        erreurMotDePasse.textContent = "Les mots de passe ne correspondent pas, veuillez reesayer";
+        erreurMotDePasse.textContent = "Les mots de passe ne correspondent pas, veuillez réessayer";
         return false; // Empêche la soumission du formulaire
-    }
-
-    else {
-        successMessage.textContent = "Votre mot de passe a été mis à jour avec succès";
-    
-    return true; // Les mots de passe correspondent, le formulaire peut être soumis
-
     }
 }
